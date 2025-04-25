@@ -38,7 +38,6 @@ $drivers = [
 require_once(__DIR__ . '/../includes/config.php');
 require_once(ROOT_PATH . '/includes/header.php');
 ?>
-<div class="container mt-5">
     <h1 class="text-center">Liste des chauffeurs</h1>
 
     <table class="table table-striped mt-4">
@@ -52,7 +51,7 @@ require_once(ROOT_PATH . '/includes/header.php');
         </thead>
         <tbody>
             <?php foreach ($drivers as $driver): ?>
-                <tr>
+                <tr> 
                     <td><?= $driver['id']; ?></td>
                     <td><?= $driver['nom']; ?></td>
                     <td><?= $driver['telephone']; ?></td>
@@ -65,7 +64,6 @@ require_once(ROOT_PATH . '/includes/header.php');
     <div class="text-center mt-4">
         <a href="add.php" class="btn btn-primary">Ajouter une Voiture</a>
     </div>
-</div>
 
 <?php require_once(ROOT_PATH . '/includes/footer.php'); ?>
 

@@ -1,8 +1,7 @@
+            </div>
         </div>
-    </div>
-  </div>
 </main>
-<footer class="bg-dark text-white text-center p-3 my-0">
+<footer class="bg-dark text-white text-center p-3">
     © <?= date('Y'); ?> TaxiManager. Tous droits réservés.
 </footer>
 <script src="<?= base_url ?>assets/js/bootstrap.bundle.js"></script>

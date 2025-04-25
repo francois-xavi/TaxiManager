@@ -56,7 +56,6 @@ require_once(ROOT_PATH . '/includes/header.php');
     <div class="text-center mt-4">
         <a href="ajouter_voiture.php" class="btn btn-primary">Ajouter une Voiture</a>
     </div>
-</div>
 
 <?php require_once(ROOT_PATH . '/includes/footer.php'); ?>
 

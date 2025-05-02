@@ -10,10 +10,6 @@
     <link rel="stylesheet" href="<?= base_url ?>assets/css/bootstrap.css">
     
     <style>
-      html, body {
-        height: 100%;
-        overflow-y: auto;
-      }
       .bd-placeholder-img {
         font-size: 1.125rem;
         text-anchor: middle;
@@ -30,7 +26,7 @@
     </style>
     <link rel="stylesheet" href="<?= base_url ?>assets/css/sidebars.css">
 </head>
-<body class="container-fluid">
+<body>
 <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
   <symbol id="bootstrap" viewBox="0 0 118 94">
     <title>Bootstrap</title>
@@ -89,74 +85,70 @@
     <path fill-rule="evenodd" d="M4 4a4 4 0 1 1 4.5 3.969V13.5a.5.5 0 0 1-1 0V7.97A4 4 0 0 1 4 3.999zm2.493 8.574a.5.5 0 0 1-.411.575c-.712.118-1.28.295-1.655.493a1.319 1.319 0 0 0-.37.265.301.301 0 0 0-.057.09V14l.002.008a.147.147 0 0 0 .016.033.617.617 0 0 0 .145.15c.165.13.435.27.813.395.751.25 1.82.414 3.024.414s2.273-.163 3.024-.414c.378-.126.648-.265.813-.395a.619.619 0 0 0 .146-.15.148.148 0 0 0 .015-.033L12 14v-.004a.301.301 0 0 0-.057-.09 1.318 1.318 0 0 0-.37-.264c-.376-.198-.943-.375-1.655-.493a.5.5 0 1 1 .164-.986c.77.127 1.452.328 1.957.594C12.5 13 13 13.4 13 14c0 .426-.26.752-.544.977-.29.228-.68.413-1.116.558-.878.293-2.059.465-3.34.465-1.281 0-2.462-.172-3.34-.465-.436-.145-.826-.33-1.116-.558C3.26 14.752 3 14.426 3 14c0-.599.5-1 .961-1.243.505-.266 1.187-.467 1.957-.594a.5.5 0 0 1 .575.411z"/>
   </symbol>
 </svg>
-<main class="row">
-      <div class="col-auto  col-xl-2 px-sm-2 d-flex flex-column flex-shrink-0 p-3 bg-light">
-        <!-- <nav class="navbar  navbar-light bg-light py-0"> -->
-            <!-- <div class="d-flex flex-column flex-shrink-0 p-3 bg-light"> -->
-                <a href="<?= base_url ?>index.php" class="d-flex align-items-center pb-3 mb-3 link-dark text-decoration-none border-bottom">
-                <svg class="bi me-2" width="30" height="24"><use xlink:href="#bootstrap"/></svg>
-                <span class="fs-5 fw-semibold">TaxiManager</span>
-                </a>
+<div class="row container-fluid">
+      <div class="col-auto  col-xl-2 px-sm-2 d-flex flex-column  p-3 bg-light ">
+          <a href="<?= base_url ?>index.php" class="d-flex align-items-center pb-3 mb-3 link-dark text-decoration-none border-bottom">
+          <svg class="bi me-2" width="30" height="24"><use xlink:href="#bootstrap"/></svg>
+          <span class="fs-5 fw-semibold">TaxiManager</span>
+          </a>
 
-                <ul class="nav nav-pills flex-column mb-auto">
-                    <li>
-                        <a href="<?= base_url ?>index.php" class="nav-link link-dark rounded">
-                        <svg class="bi me-2" width="16" height="16"><use xlink:href="#speedometer2"/></svg>
-                        Tableau de bord
-                        </a>
-                    </li>
-                    <li class="mb-1">
-                        <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#dashboard-collapse" aria-expanded="false">
-                        Voitures
-                        </button>
-                        <div class="collapse" id="dashboard-collapse">
-                        <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-                            <li><a href="<?= base_url ?>cars/index.php" class="nav-link link-dark rounded">Voir la liste</a></li>
-                            <li><a href="<?= base_url ?>cars/add.php" class="nav-link link-dark rounded">Ajouter un nouveau</a></li>
-                        </ul>
-                        </div>
-                    </li>
-                    <li class="mb-1">
-                        <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#orders-collapse" aria-expanded="false">
-                        Chauffeurs
-                        </button>
-                        <div class="collapse" id="orders-collapse">
-                          <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-                              <li><a href="<?= base_url ?>drivers/index.php" class="nav-link link-dark rounded">Voir la liste</a></li>
-                              <li><a href="<?= base_url ?>drivers/add.php" class="nav-link link-dark rounded">Ajouter un nouveau</a></li>
-                          </ul>
-                        </div>
-                    </li>
-                    <li class="mb-1">
-                        <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#account-collapse" aria-expanded="false">
-                        Fournisseurs
-                        </button>
-                        <div class="collapse" id="account-collapse">
-                          <ul class="btn-toggle-nav list-unstyled fw-normal pb-1">
-                              <li><a href="<?= base_url ?>providers/index.php" class="nav-link link-dark rounded">Voir la liste</a></li>
-                              <li><a href="<?= base_url ?>providers/add.php" class="nav-link link-dark rounded">Ajouter un nouveau</a></li>
-                          </ul>
-                        </div>
-                    </li>
-                </ul>
-                <hr>
-                <div class="dropdown">
-                <a href="#" class="d-flex align-items-center link-dark text-decoration-none dropdown-toggle" id="dropdownUser2" data-bs-toggle="dropdown" aria-expanded="false">
-                    <img src="https://github.com/mdo.png" alt="" width="32" height="32" class="rounded-circle me-2">
-                    <strong>mdo</strong>
-                </a>
-                <ul class="dropdown-menu text-small shadow" aria-labelledby="dropdownUser2">
-                    <li><a class="dropdown-item" href="#">New project...</a></li>
-                    <li><a class="dropdown-item" href="#">Settings</a></li>
-                    <li><a class="dropdown-item" href="#">Profile</a></li>
-                    <li><hr class="dropdown-divider"></li>
-                    <li><a class="dropdown-item" href="#">Sign out</a></li>
-                </ul>
-                </div>
-            <!-- </div> -->
-        <!-- </nav> -->
+          <ul class="nav nav-pills flex-column mb-auto">
+              <li>
+                  <a href="<?= base_url ?>index.php" class="nav-link link-dark rounded">
+                  <svg class="bi me-2" width="16" height="16"><use xlink:href="#speedometer2"/></svg>
+                  Tableau de bord
+                  </a>
+              </li>
+              <li class="mb-1">
+                  <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#dashboard-collapse" aria-expanded="false">
+                  Voitures
+                  </button>
+                  <div class="collapse" id="dashboard-collapse">
+                  <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                      <li><a href="<?= base_url ?>cars/index.php" class="nav-link link-dark rounded">Voir la liste</a></li>
+                      <li><a href="<?= base_url ?>cars/add.php" class="nav-link link-dark rounded">Ajouter un nouveau</a></li>
+                  </ul>
+                  </div>
+              </li>
+              <li class="mb-1">
+                  <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#orders-collapse" aria-expanded="false">
+                  Chauffeurs
+                  </button>
+                  <div class="collapse" id="orders-collapse">
+                    <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                        <li><a href="<?= base_url ?>drivers/index.php" class="nav-link link-dark rounded">Voir la liste</a></li>
+                        <li><a href="<?= base_url ?>drivers/add.php" class="nav-link link-dark rounded">Ajouter un nouveau</a></li>
+                    </ul>
+                  </div>
+              </li>
+              <li class="mb-1">
+                  <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#account-collapse" aria-expanded="false">
+                  Fournisseurs
+                  </button>
+                  <div class="collapse" id="account-collapse">
+                    <ul class="btn-toggle-nav list-unstyled fw-normal pb-1">
+                        <li><a href="<?= base_url ?>providers/index.php" class="nav-link link-dark rounded">Voir la liste</a></li>
+                        <li><a href="<?= base_url ?>providers/add.php" class="nav-link link-dark rounded">Ajouter un nouveau</a></li>
+                    </ul>
+                  </div>
+              </li>
+          </ul>
+          <hr>
+          <div class="dropdown">
+          <a href="#" class="d-flex align-items-center link-dark text-decoration-none dropdown-toggle" id="dropdownUser2" data-bs-toggle="dropdown" aria-expanded="false">
+              <img src="https://github.com/mdo.png" alt="" width="32" height="32" class="rounded-circle me-2">
+              <strong>mdo</strong>
+          </a>
+          <ul class="dropdown-menu text-small shadow" aria-labelledby="dropdownUser2">
+              <li><a class="dropdown-item" href="#">New project...</a></li>
+              <li><a class="dropdown-item" href="#">Settings</a></li>
+              <li><a class="dropdown-item" href="#">Profile</a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a class="dropdown-item" href="#">Sign out</a></li>
+          </ul>
+          </div>
       </div>
-      <div class="col-10  py-3">
-        <!-- Main content goes here -->   
+      <main class="col-10  py-3">
+        <!-- Main content goes here -->
         <div class="container mt-5">
       

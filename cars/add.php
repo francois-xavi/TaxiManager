@@ -2,8 +2,17 @@
 <?php
 // add.php
 // This file is part of the TaxiManager project.
+
+// Include the database connection and header
 require_once(__DIR__ . '/../includes/config.php');
 require_once(ROOT_PATH . '/includes/header.php');
+require_once(ROOT_PATH . '/includes/db.php');
+$stmt = $pdo->prepare("SELECT * FROM drivers");
+$stmt->execute();
+$drivers = $stmt->fetchAll(PDO::FETCH_ASSOC);
+$stmt = $pdo->prepare("SELECT * FROM providers");
+$stmt->execute();
+$providers = $stmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
 <h1 class="text-center">Ajouter une Voiture</h1>
 <form class="row g-3 mt-4" action="submit.php" method="POST">
@@ -39,18 +48,18 @@ require_once(ROOT_PATH . '/includes/header.php');
     <label for="inputProvider" class="form-label">Fournisseur</label>
     <select id="inputProvider" class="form-select" name="provider">
       <option selected>Choisir...</option>
-      <option value="1">Provider 1</option>
-      <option value="2">Provider 2</option>
-      <option value="3">Provider 3</option>
+      <?php foreach ($providers as $provider): ?>
+        <option value="<?= $provider['id']; ?>"><?= htmlspecialchars($provider['name']); ?></option>
+      <?php endforeach; ?>
     </select>
   </div>
   <div class="col-md-3">
     <label for="inputDriver" class="form-label">Chauffeur</label>
     <select id="inputDriver" class="form-select" name="driver">
       <option selected>Choisir...</option>
-      <option value="1">Chauffeur 1</option>
-      <option value="2">Chauffeur 2</option>
-      <option value="3">Chauffeur 3</option>
+      <?php foreach ($drivers as $driver): ?>
+        <option value="<?= $driver['id']; ?>"><?= htmlspecialchars($driver['first_name'] . ' ' . $driver['last_name']); ?></option>
+      <?php endforeach; ?>
     </select>
   </div>
   <!-- <div class="col-12">

@@ -44,7 +44,7 @@ $method = $_SERVER['REQUEST_METHOD'] ?? 'POST'; // Put or Post
 $id = $_POST['id'] ?? null;
 $niv = $_POST['niv'] ?? null;
 $ngfl = $_POST['ngfl'] ?? null;
-$nvin = $_POST['nvin'] ?? null;
+$vin = $_POST['nvin'] ?? null;
 $brand = $_POST['brand'] ?? null;
 $model = $_POST['model'] ?? null;
 $color = $_POST['color'] ?? null;
@@ -56,11 +56,11 @@ $driver = $_POST['driver'] ?? null;
 
 if ($method === 'POST' && !empty($id)) {
     // Edit
-    $stmt = $pdo->prepare("UPDATE cars SET `niv` = :niv, `ngfl` = :ngfl, `nvin` = :nvin, `brand` = :brand, `model` = :model, `color` = :color, `year` = :year, `provider` = :provider, `driver` = :driver WHERE id = :id");
+    $stmt = $pdo->prepare("UPDATE cars SET `niv` = :niv, `ngfl` = :ngfl, `vin` = :vin, `brand` = :brand, `model` = :model, `color` = :color, `year` = :year, `provider_id` = :provider, `driver_id` = :driver WHERE id = :id");
     $stmt->bindParam('id', $id, PDO::PARAM_INT);
     $stmt->bindParam('niv', $niv, PDO::PARAM_STR);
     $stmt->bindParam('ngfl', $ngfl, PDO::PARAM_STR);
-    $stmt->bindParam('nvin', $nvin, PDO::PARAM_STR);
+    $stmt->bindParam('vin', $vin, PDO::PARAM_STR);
     $stmt->bindParam('brand', $brand, PDO::PARAM_STR);
     $stmt->bindParam('model', $model, PDO::PARAM_STR);
     $stmt->bindParam('color', $color, PDO::PARAM_STR);
@@ -70,17 +70,17 @@ if ($method === 'POST' && !empty($id)) {
     $stmt->execute();
 } else {
     // Insert
-    $stmt = $pdo->prepare("INSERT INTO `cars` (`niv`, `ngfl`, `nvin`, `brand`, `model`, `color`, `year`, `provider`, `driver`) VALUES (:niv, :ngfl, :nvin, :brand, :model, :color, :year, :provider, :driver)");
+    $stmt = $pdo->prepare("INSERT INTO `cars` (`niv`, `ngfl`, `vin`, `brand`, `model`, `color`, `year`, `provider_id`, `driver_id`) VALUES (:niv, :ngfl, :vin, :brand, :model, :color, :year, :provider, :driver)");
     $stmt->bindParam('niv', $niv, PDO::PARAM_STR);
     $stmt->bindParam('ngfl', $ngfl, PDO::PARAM_STR);
-    $stmt->bindParam('nvin', $nvin, PDO::PARAM_STR);
+    $stmt->bindParam('vin', $vin, PDO::PARAM_STR);
     $stmt->bindParam('brand', $brand, PDO::PARAM_STR);
     $stmt->bindParam('model', $model, PDO::PARAM_STR);
     $stmt->bindParam('color', $color, PDO::PARAM_STR);
     $stmt->bindParam('year', $year, PDO::PARAM_INT);
     $stmt->bindParam('provider', $provider, PDO::PARAM_INT);
     $stmt->bindParam('driver', $driver, PDO::PARAM_INT);
-    $stmt->execute([$niv, $ngfl, $nvin, $brand, $model, $color, $year, $provider, $driver]);
+    $stmt->execute();
     $id = $pdo->lastInsertId();
 }
 

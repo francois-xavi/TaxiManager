@@ -110,16 +110,6 @@ if (!$driver) {
     <button type="submit" class="btn btn-primary">Modifier</button>
   </div>
 </form>
-<p>
-    <small class="text-muted">Note: Assurez-vous que toutes les informations sont correctes avant de soumettre le formulaire.</small>
-    
-        <div class="alert alert-danger mt-3">
-            <?= htmlspecialchars($driver['country']) ?>
-            <?= htmlspecialchars($driver['licence_type']) ?>
-            <?= htmlspecialchars($driver['birth_date']) ?>
-            <?= $driver['licence_type'] === 'E' ? 'selected' : '' ?>
-        </div>
-</p>
 
 
 

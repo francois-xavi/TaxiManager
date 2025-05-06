@@ -1,46 +1,50 @@
 <?php
-
-method_exists($_SERVER, 'REQUEST_METHOD') && $_SERVER['REQUEST_METHOD'] === 'POST' or die('Accès interdit !');
 require_once(__DIR__ . '/../includes/config.php');
-$postData = $_POST; 
+require_once(ROOT_PATH . '/includes/db.php');
 
-if (
-    !isset($postData['email'])
-    || !filter_var($postData['email'], FILTER_VALIDATE_EMAIL)
-    || empty($postData['message'])
-    || trim($postData['message']) === ''
-) {
-    echo('Il faut un email et un message valides pour soumettre le formulaire.');
-    return;
+$error = [];
+$method = $_SERVER['REQUEST_METHOD'] ?? 'POST'; // Put or Post
+$id = $_POST['id'] ?? null;
+$name = $_POST['name'] ?? null;
+$address = $_POST['address'] ?? null;
+$city = $_POST['city'] ?? null;
+$country = $_POST['country'] ?? null;
+$supplier_type = $_POST['supplier_type'] ?? null;
+$phone = $_POST['phone'] ?? null;
+$email = $_POST['email'] ?? null;
+$website = $_POST['website'] ?? null;
+
+// Validate inputs
+if ($method === 'POST' && !empty($id)) {
+    // Edit
+    $stmt = $pdo->prepare("UPDATE providers SET `name` = :name, `address` = :address, `city` = :city, `country` = :country, `supplier_type` = :supplier_type, `phone` = :phone, `email` = :email, `website` = :website WHERE id = :id");
+    $stmt->bindParam('id', $id, PDO::PARAM_INT);
+    $stmt->bindParam('name', $name, PDO::PARAM_STR);
+    $stmt->bindParam('address', $address, PDO::PARAM_STR);
+    $stmt->bindParam('city', $city, PDO::PARAM_STR);
+    $stmt->bindParam('country', $country, PDO::PARAM_STR);
+    $stmt->bindParam('supplier_type', $supplier_type, PDO::PARAM_STR);
+    $stmt->bindParam('phone', $phone, PDO::PARAM_STR);
+    $stmt->bindParam('email', $email, PDO::PARAM_STR);
+    $stmt->bindParam('website', $website, PDO::PARAM_STR);
+    $stmt->execute();
+} else {
+    // Add
+    $stmt = $pdo->prepare("INSERT INTO providers (`name`, `address`, `city`, `country`, `supplier_type`, `phone`, `email`, `website`) VALUES (:name, :address, :city, :country, :supplier_type, :phone, :email, :website)");
+    // Bind parameters
+    $stmt->bindParam('name', $name, PDO::PARAM_STR);
+    $stmt->bindParam('address', $address, PDO::PARAM_STR);
+    $stmt->bindParam('city', $city, PDO::PARAM_STR);
+    $stmt->bindParam('country', $country, PDO::PARAM_STR);
+    $stmt->bindParam('supplier_type', $supplier_type, PDO::PARAM_STR);
+    $stmt->bindParam('phone', $phone, PDO::PARAM_STR);
+    $stmt->bindParam('email', $email, PDO::PARAM_STR);
+    $stmt->bindParam('website', $website, PDO::PARAM_STR);
+    $stmt->execute();
+    $id = $pdo->lastInsertId();
 }
-
-$isFileLoaded = false;
-// Testons si le fichier a bien été envoyé et s'il n'y a pas des erreurs
-if (isset($_FILES['screenshot']) && $_FILES['screenshot']['error'] === 0) {
-    // Testons, si le fichier est trop volumineux
-    if ($_FILES['screenshot']['size'] > 1000000) {
-        echo "L'envoi n'a pas pu être effectué, erreur ou image trop volumineuse";
-        return;
-    }
-
-    // Testons, si l'extension n'est pas autorisée
-    $fileInfo = pathinfo($_FILES['screenshot']['name']);
-    $extension = $fileInfo['extension'];
-    $allowedExtensions = ['jpg', 'jpeg', 'gif', 'png'];
-    if (!in_array($extension, $allowedExtensions)) {
-        echo "L'envoi n'a pas pu être effectué, l'extension {$extension} n'est pas autorisée";
-        return;
-    }
-
-    // Testons, si le dossier uploads est manquant
-    $path = __DIR__ . '/uploads/';
-    if (!is_dir($path)) {
-        echo "L'envoi n'a pas pu être effectué, le dossier uploads est manquant";
-        return;
-    }
-
-    // On peut valider le fichier et le stocker définitivement
-    move_uploaded_file($_FILES['screenshot']['tmp_name'], $path . basename($_FILES['screenshot']['name']));
-    $isFileLoaded = true;
-}
+// Redirect to the edit page
+// Assuming you have an edit.php page to edit the user details
+header("Location: edit.php?id=$id");
+exit();
 ?>

@@ -17,9 +17,14 @@ $carId = isset($_GET['id']) ? intval($_GET['id']) : null;
 $stmtcar = $pdo->prepare("SELECT * FROM cars WHERE id = ?");
 $stmtcar->execute([$carId]);
 $car = $stmtcar->fetch(PDO::FETCH_ASSOC);
-
+if (!$car) {
+    // Handle the case where the car is not found (e.g., redirect or show an error message)
+    header("Location: index.php?message=Voiture non trouvée.");
+    exit();
+}
+// Check if the form is submitted
 ?>
-<h1 class="text-center">Ajouter une Voiture</h1>
+<h1 class="text-center">Modifier une Voiture</h1>
 <form class="row g-3 mt-4" action="submit.php" method="POST">
   <div class="col-md-4">
     <label for="inputniv" class="form-label">Numero d'immatriculation du véhicule</label>
@@ -31,7 +36,7 @@ $car = $stmtcar->fetch(PDO::FETCH_ASSOC);
   </div>
   <div class="col-md-4">
     <label for="inputnvin" class="form-label">Numéro de chassis / Numéro VIN</label>
-    <input type="text" class="form-control" id="inputnvin" placeholder="1HGCM82633A123456" name="nvin" value="<?= htmlspecialchars($car['nvin']) ?>" required>
+    <input type="text" class="form-control" id="inputnvin" placeholder="1HGCM82633A123456" name="nvin" value="<?= htmlspecialchars($car['vin']) ?>" required>
   </div>
   <div class="col-md-3">
     <label for="inputmarque" class="form-label">Marque du véhicule:</label>
@@ -75,8 +80,9 @@ $car = $stmtcar->fetch(PDO::FETCH_ASSOC);
       </label>
     </div>
   </div> -->
+  <input type="hidden" name="id" value="<?= $carId ?>">
   <div class="col-12">
-    <button type="submit" class="btn btn-primary">Ajouter</button>
+    <button type="submit" class="btn btn-primary">modifier</button>
   </div>
 </form>
 

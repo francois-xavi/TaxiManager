@@ -5,7 +5,7 @@ require_once(__DIR__ . '/../includes/config.php');
 require_once(ROOT_PATH . '/includes/header.php');
 require_once(ROOT_PATH . '/includes/db.php');
 
-$smtp = $pdo->prepare("SELECT * FROM providers");
+$smtp = $pdo->prepare("SELECT id, name, supplier_type, phone FROM providers");
 $smtp->execute();
 $providers = $smtp->fetchAll(PDO::FETCH_ASSOC);
 ?>

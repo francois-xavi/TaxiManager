@@ -2,8 +2,8 @@
 <?php
 require_once(__DIR__ . '/../includes/config.php');
 require_once(ROOT_PATH . '/includes/db.php');
-
-$stmt = $pdo->prepare("SELECT * FROM drivers");
+$query = "SELECT id, last_name, first_name, phone, year_experience FROM drivers";
+$stmt = $pdo->prepare($query);
 $stmt->execute();
 $drivers = $stmt->fetchAll(PDO::FETCH_ASSOC);
 require_once(__DIR__ . '/../includes/config.php');
